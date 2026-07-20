@@ -39,14 +39,6 @@ window.getSupabaseClient = function(contexto = '') {
     if (!window.supabaseClientGlobal && typeof SUPABASE_CONFIG !== 'undefined') {
         window.supabaseClientGlobal = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
     }
-    if (!window.supabaseClientFrota && typeof SUPABASE_CONFIG_FROTA !== 'undefined') {
-        window.supabaseClientFrota = supabase.createClient(SUPABASE_CONFIG_FROTA.url, SUPABASE_CONFIG_FROTA.key);
-    }
-
-    const ctxLower = contexto.toLowerCase();
-    if (ctxLower.includes('operacional') || ctxLower.includes('manutenção') || ctxLower.includes('manutencao') || ctxLower === 'resp_operacional' || ctxLower === 'resp_manutencao') {
-        return window.supabaseClientFrota;
-    }
     
     return window.supabaseClientGlobal;
 };

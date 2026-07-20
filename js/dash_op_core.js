@@ -3,8 +3,8 @@
 // =========================================================
 
 // --- GERENCIADOR INTELIGENTE DE MÚLTIPLOS BANCOS ---
-window.SUPABASE_URL_OP = 'https://arjzadbtkhagfydymxda.supabase.co';
-window.SUPABASE_KEY_OP = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyanphZGJ0a2hhZ2Z5ZHlteGRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ3MzUsImV4cCI6MjA5Nzc2MDczNX0.B7d0-lJyYpF9aRgD4t9-ZeyE9haLxBZf4D8WwrKCny8';
+window.SUPABASE_URL_OP = 'https://pcxyvsfragsveevlvxab.supabase.co';
+window.SUPABASE_KEY_OP = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjeHl2c2ZyYWdzdmVldmx2eGFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0OTgxMjMsImV4cCI6MjA5OTA3NDEyM30.pJCTM1MX7sv3evcksijGxgJT5jJQ8wVowtt4Vls6NpY';
 
 if (!window.supabaseClientLocal) {
     window.supabaseClientLocal = window.supabase.createClient(window.SUPABASE_URL_OP, window.SUPABASE_KEY_OP);
