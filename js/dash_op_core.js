@@ -2,24 +2,13 @@
 // MÓDULO 3: NÚCLEO, FILTROS E CÁLCULOS (OPERACIONAL)
 // =========================================================
 
-// --- GERENCIADOR INTELIGENTE DE MÚLTIPLOS BANCOS ---
-window.SUPABASE_URL_OP = 'https://pcxyvsfragsveevlvxab.supabase.co';
-window.SUPABASE_KEY_OP = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjeHl2c2ZyYWdzdmVldmx2eGFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0OTgxMjMsImV4cCI6MjA5OTA3NDEyM30.pJCTM1MX7sv3evcksijGxgJT5jJQ8wVowtt4Vls6NpY';
-
-if (!window.supabaseClientLocal) {
-    window.supabaseClientLocal = window.supabase.createClient(window.SUPABASE_URL_OP, window.SUPABASE_KEY_OP);
-}
-if (!window.supabaseClientMan) {
-    window.supabaseClientMan = window.supabase.createClient('https://ihgiyxzxdldqmrkziijl.supabase.co', 'sb_publishable_JpMZhW5ZrFKBr7m9KXBkoQ_cpxy1k3x');
-}
+// --- GERENCIADOR UNIFICADO DE BANCO DE DADOS ---
+// Unifica as chamadas antigas para usar o banco global inicializado no config_db.js
+window.supabaseClientLocal = window.supabaseClientGlobal;
+window.supabaseClientMan = window.supabaseClientGlobal;
 
 window.getGlobalDB = function() {
-    if (window.supabaseClientGlobal) return window.supabaseClientGlobal;
-    if (typeof SUPABASE_CONFIG !== 'undefined') {
-        window.supabaseClientGlobal = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
-        return window.supabaseClientGlobal;
-    }
-    return window.supabaseClientMan; // Fallback
+    return window.supabaseClientGlobal;
 };
 // --------------------------------------------------
 

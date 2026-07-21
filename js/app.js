@@ -34,12 +34,7 @@ let lastClickTime = 0;
 
 // GERENCIADOR DE BANCO DE DADOS
 window.getSupabaseClient = function(contexto = '') {
-    if (typeof supabase === 'undefined') return null;
-
-    if (!window.supabaseClientGlobal && typeof SUPABASE_CONFIG !== 'undefined') {
-        window.supabaseClientGlobal = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
-    }
-    
+    // Retorna a conexão global inicializada no config_db.js
     return window.supabaseClientGlobal;
 };
 
@@ -100,10 +95,6 @@ async function loadModule(event, subTitle, fileName, respKey, defName) {
     let nomeResponsavel = defName;
     if (respKey !== 'none') {
         try {
-            // CORREÇÃO: Busca os nomes SEMPRE no banco Principal, pois a tabela configuracoes só existe lá
-            if (!window.supabaseClientGlobal && typeof SUPABASE_CONFIG !== 'undefined') {
-                window.supabaseClientGlobal = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
-            }
             if (window.supabaseClientGlobal) {
                 const { data } = await window.supabaseClientGlobal.from('configuracoes').select('valor').eq('chave', respKey).limit(1);
                 if (data && data.length > 0) {
@@ -203,10 +194,6 @@ async function carregarDropdownResponsaveis() {
     
     let membrosSalvos = [];
     try {
-        // CORREÇÃO: Sempre busca os membros do Kanban no banco PRINCIPAL
-        if (!window.supabaseClientGlobal && typeof SUPABASE_CONFIG !== 'undefined') {
-            window.supabaseClientGlobal = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
-        }
         if (window.supabaseClientGlobal) {
             const { data } = await window.supabaseClientGlobal.from('configuracoes').select('valor').eq('chave', 'membros_kanban').limit(1);
             if (data && data.length > 0) {
@@ -297,11 +284,6 @@ window.salvarKanbanItem = async function() {
     msg.innerText = 'Salvando no banco de dados...';
     
     try {
-        // CORREÇÃO: Salva o Kanban SEMPRE no banco Principal
-        if (!window.supabaseClientGlobal && typeof SUPABASE_CONFIG !== 'undefined') {
-            window.supabaseClientGlobal = supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
-        }
-        
         if (window.supabaseClientGlobal) {
             const { error } = await window.supabaseClientGlobal.from('kanban_metas').insert([item]);
             
