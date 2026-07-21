@@ -1,13 +1,11 @@
 // =================================================================
 // ARQUIVO: os_painel.js
-// COM LOGS DE DEPURAÇÃO (DEBUG)
+// COM LOGS DE DEPURAÇÃO (DEBUG) E ACESSO CENTRALIZADO AO SUPABASE
 // =================================================================
-console.log('[OS Painel] Inicializando os_painel.js e instanciando o Supabase...');
+console.log('[OS Painel] Inicializando os_painel.js e instanciando o Supabase centralizado...');
 
-const supabaseUrlManutencao = 'https://pcxyvsfragsveevlvxab.supabase.co';
-const supabaseKeyManutencao = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjeHl2c2ZyYWdzdmVldmx2eGFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0OTgxMjMsImV4cCI6MjA5OTA3NDEyM30.pJCTM1MX7sv3evcksijGxgJT5jJQ8wVowtt4Vls6NpY';
-
-const supabaseManutencao = window.getSupabaseClient ? window.getSupabaseClient('manutencao') : window.supabase.createClient(supabaseUrlManutencao, supabaseKeyManutencao);
+// Removidas as credenciais daqui! Utilizando conexão global do config_db.js
+const supabaseManutencao = window.supabaseClientGlobal;
 
 window.ordensServico = [];
 window.frotasManutencao = [];
@@ -16,7 +14,7 @@ window.estadoFiltroGlobal = { tipo: 'MES_ATUAL', mesAno: '' };
 window.carregarDadosManutencao = async function() {
     console.log('[OS Painel] INICIANDO REQUISIÇÃO SUPABASE -> carregarDadosManutencao()');
     try {
-        // CORREÇÃO: Order by id desc para pegar as O.S mais NOVAS e limit extendido
+        // Order by id desc para pegar as O.S mais NOVAS e limit extendido
         const { data: osData, error: osError } = await supabaseManutencao
             .from('ordens_servico')
             .select('*')
